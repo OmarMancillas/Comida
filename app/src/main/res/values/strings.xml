@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Comida</string>
+    <string name="login">Login</string>
+    <string name="titulo">Orden Lista</string>
+    <string name="registro">Registro</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_vista_principal">VistaPrincipalActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="restaurantes_disponibles">Restaurantes disponibles</string>
+    <string name="menu_restaurante">Menu restaurante</string>
+    <string name="menu_promociones">Promociones</string>
+    <string name="menu_cuenta">Cuenta</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="menu_principal">MENU PRINCIPAL</string>
+</resources>
