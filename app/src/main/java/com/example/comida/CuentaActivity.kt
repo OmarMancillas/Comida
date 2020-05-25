@@ -16,6 +16,8 @@ class CuentaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cuenta)
+//        Log.i("Cuenta",intent.getStringExtra("USER_INFO"))
+        //NUEVO CAMBIO
 
         btnCambiarFoto.setOnClickListener(
             View.OnClickListener {

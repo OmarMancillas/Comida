@@ -41,6 +41,8 @@ class RegisterActivity : AppCompatActivity() {
                 put("telefono",etTelefono.text.toString())
             }
             val newRowId = db?.insert("Usuarios", null, values)
+            Log.i("Nuevo usuario",newRowId.toString())
+//            if(newRowId?.compareTo(0)==0)
 
             view?. let {
                 Log.i("REGISTRAR", "Usuario registrado")

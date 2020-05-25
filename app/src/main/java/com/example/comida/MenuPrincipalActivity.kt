@@ -12,10 +12,12 @@ class MenuPrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_principal)
+
         Log.i("Sesion de usuario",intent.getStringExtra("USER_SESSION_ID"))
+//        intent.putExtra("USER_SESSION_ID",intent.getStringExtra("USER_SESSION_ID"))
         btnCuenta.setOnClickListener(){
             val intent = Intent(applicationContext, CuentaActivity::class.java)
-            intent.putExtra("USER_SESSION_ID", intent.getStringExtra("USER_SESSION_ID"))
+            intent.putExtra("USER_INFO", intent.getStringExtra("USER_SESSION_ID"))
             startActivity(intent)
         }
     }
