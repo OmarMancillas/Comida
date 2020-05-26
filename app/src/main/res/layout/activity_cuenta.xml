@@ -89,4 +89,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
 
+    <Button
+        android:id="@+id/btnGuardarCambios"
+        android:layout_marginBottom="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boton_redondo"
+        android:text="Guardar cambios"
+        android:layout_margin="@dimen/big_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
