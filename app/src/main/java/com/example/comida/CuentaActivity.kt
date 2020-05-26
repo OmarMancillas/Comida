@@ -22,9 +22,9 @@ class CuentaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cuenta)
         var usuario = intent.getStringExtra("USER_SESSION_ID")
 
-        if(fileList().contains("datos.txt")) {
+        if(fileList().contains("datos-${usuario}.txt")) {
             try {
-                val archivo = InputStreamReader(openFileInput("datos.txt"))
+                val archivo = InputStreamReader(openFileInput("datos-${usuario}.txt"))
                 val br = BufferedReader(archivo)
                 var linea = br.readLine()
                 val todo = StringBuilder()
@@ -34,7 +34,7 @@ class CuentaActivity : AppCompatActivity() {
                 }
                 br.close()
                 archivo.close()
-
+                tvMostrarDatos.text=todo
             } catch (e: IOException) {
             }
         }

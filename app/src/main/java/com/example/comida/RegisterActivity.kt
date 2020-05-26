@@ -46,8 +46,8 @@ class RegisterActivity : AppCompatActivity() {
             val newRowId = db?.insert("Usuarios", null, values)
 
             try {
-                val archivo = OutputStreamWriter(openFileOutput("datos.txt", Activity.MODE_PRIVATE))
-                archivo.write("Nombre: ${etNombre.text.toString()}\nTelefono: ${etTelefono.text.toString()}\nEmail/Usuario: ${etEmail.text.toString()}\nPassword: ${etPassword.text.toString()}")
+                val archivo = OutputStreamWriter(openFileOutput("datos-${etEmail.text}.txt", Activity.MODE_PRIVATE))
+                archivo.write("Nombre: ${etNombre.text.toString()}\n\nTelefono: ${etTelefono.text.toString()}\n\nEmail/Usuario: ${etEmail.text.toString()}")
                 archivo.flush()
                 archivo.close()
             } catch (e: IOException) {
