@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 //        val cursor = db.rawQuery("SELECT * FROM Usuarios ",null)
         val cursor = db.rawQuery("SELECT * FROM Usuarios WHERE usuario = ? AND password=?", arrayOf<String>("${etUsername.text.toString()}","${etLoginPassword.text.toString()}") )
         var usuario:String= etUsername.text.toString()
-        var password:String=""
 //        with(cursor) {
 //            while (moveToNext()) {
 //                usuario = cursor.getString(getColumnIndex("usuario"))
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
         if(cursor.count>0){
-            val intent = Intent(applicationContext, MenuPrincipalActivity::class.java)
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
             intent.putExtra("USER_SESSION_ID", usuario.toString())
             startActivity(intent)
         }else{

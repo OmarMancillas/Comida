@@ -8,7 +8,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_menu_principal.*
 
 class MenuPrincipalActivity : AppCompatActivity() {
-
+//    var usuario:String = intent.getStringExtra("USER_SESSINO_ID")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_principal)
@@ -16,8 +16,9 @@ class MenuPrincipalActivity : AppCompatActivity() {
         Log.i("Sesion de usuario",intent.getStringExtra("USER_SESSION_ID"))
 //        intent.putExtra("USER_SESSION_ID",intent.getStringExtra("USER_SESSION_ID"))
         btnCuenta.setOnClickListener(){
-            val intent = Intent(applicationContext, CuentaActivity::class.java)
-            intent.putExtra("USER_INFO", intent.getStringExtra("USER_SESSION_ID"))
+            var usuario = intent.getStringExtra("USER_SESSION_ID")
+            val intent = Intent(this, CuentaActivity::class.java)
+            intent.putExtra("USER_SESSION_ID", usuario)
             startActivity(intent)
         }
     }

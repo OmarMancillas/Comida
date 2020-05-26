@@ -1,5 +1,6 @@
 package com.example.comida
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,11 +9,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.etPassword
+import java.io.IOException
+import java.io.OutputStreamWriter
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -28,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
                 .setMessage("Algunos datos no fueron capturados correctamente. " +
                         "Verifique que se hayan llenado todos los campos.")
                 .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
-                .show();
+                .show()
         }else{
             val dbHelper = BDUsuarios(applicationContext)
             val db = dbHelper?.writableDatabase
@@ -41,9 +44,15 @@ class RegisterActivity : AppCompatActivity() {
                 put("telefono",etTelefono.text.toString())
             }
             val newRowId = db?.insert("Usuarios", null, values)
-            val string:String=""
-//            if(newRowId?.compareTo(0)==0)
 
+            try {
+                val archivo = OutputStreamWriter(openFileOutput("datos.txt", Activity.MODE_PRIVATE))
+                archivo.write(etNombre.text.toString()+"\n"+etTelefono.text.toString()+"\n"+etEmail.text.toString()+"\n"+etPassword.text.toString())
+                archivo.flush()
+                archivo.close()
+            } catch (e: IOException) {
+            }
+            Toast.makeText(this, "Los datos fueron guardados",Toast.LENGTH_SHORT).show()
             view?. let {
                 Log.i("REGISTRAR", "Usuario registrado")
                 Snackbar.make(it, "¡Usuario registrado exitosamente!", Snackbar.LENGTH_LONG).show() }
