@@ -47,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
 
             try {
                 val archivo = OutputStreamWriter(openFileOutput("datos.txt", Activity.MODE_PRIVATE))
-                archivo.write(etNombre.text.toString()+"\n"+etTelefono.text.toString()+"\n"+etEmail.text.toString()+"\n"+etPassword.text.toString())
+                archivo.write("Nombre: ${etNombre.text.toString()}\nTelefono: ${etTelefono.text.toString()}\nEmail/Usuario: ${etEmail.text.toString()}\nPassword: ${etPassword.text.toString()}")
                 archivo.flush()
                 archivo.close()
             } catch (e: IOException) {

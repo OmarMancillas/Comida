@@ -22,40 +22,57 @@ class CuentaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cuenta)
         var usuario = intent.getStringExtra("USER_SESSION_ID")
 
+        if(fileList().contains("datos.txt")) {
+            try {
+                val archivo = InputStreamReader(openFileInput("datos.txt"))
+                val br = BufferedReader(archivo)
+                var linea = br.readLine()
+                val todo = StringBuilder()
+                while (linea != null) {
+                    todo.append(linea + "\n")
+                    linea = br.readLine()
+                }
+                br.close()
+                archivo.close()
+
+            } catch (e: IOException) {
+            }
+        }
+
         btnCambiarFoto.setOnClickListener(
             View.OnClickListener {
                 AbrirGaleria()
             }
         )
 
-        btnGuardarCambios.setOnClickListener(View.OnClickListener {
-            if(fileList().contains("datos.txt")){
-                try {
-                    val archivo = InputStreamReader(openFileInput("datos.txt"))
-                    val br = BufferedReader(archivo)
-                    var linea = br.readLine()
-                    val todo = StringBuilder()
-                    while (linea != null) {
-                        todo.append(linea + "\n")
-                        linea = br.readLine()
-                    }
-                    br.close()
-                    archivo.close()
-                    AlertDialog.Builder(this)
-                        .setTitle("Cuenta.")
-                        .setMessage(todo)
-                        .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
-                        .show();
-                } catch (e: IOException) {
-                }
-            }else{
-                AlertDialog.Builder(this)
-                    .setTitle("Cuenta.")
-                    .setMessage("No se encontro el archivo")
-                    .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
-                    .show();
-            }
-        })
+//        btnGuardarCambios.setOnClickListener(View.OnClickListener {
+//            if(fileList().contains("datos.txt")){
+//                try {
+//                    val archivo = InputStreamReader(openFileInput("datos.txt"))
+//                    val br = BufferedReader(archivo)
+//                    var linea = br.readLine()
+//                    val to do = StringBuilder()
+//                    while (linea != null) {
+//                        tod o.append(linea + "\n")
+//                        linea = br.readLine()
+//                    }
+//                    br.close()
+//                    archivo.close()
+//                    AlertDialog.Builder(this)
+//                        .setTitle("Cuenta.")
+//                        .setMessage(to do)
+//                        .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
+//                        .show();
+//                } catch (e: IOException) {
+//                }
+//            }else{
+//                AlertDialog.Builder(this)
+//                    .setTitle("Cuenta.")
+//                    .setMessage("No se encontro el archivo")
+//                    .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
+//                    .show();
+//            }
+//        })
 
 //        val dbHelper = BDUsuarios(applicationContext)
 //        val db = dbHelper?.readableDatabase
