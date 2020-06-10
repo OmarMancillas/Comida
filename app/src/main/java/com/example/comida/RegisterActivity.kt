@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.comida.RoomDatabase.AppDatabase
+import com.example.comida.entities.Usuarios
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.etPassword
@@ -24,45 +26,93 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
 
-    fun onRegistrar(view : View){
-        if(etNombre.text.isEmpty() || etTelefono.text.isEmpty() || etEmail.text.isEmpty() || etPassword.text.isEmpty()){
+    fun onRegistrar(view: View) {
+        if (etNombre.text.isEmpty() || etTelefono.text.isEmpty() || etEmail.text.isEmpty() || etPassword.text.isEmpty()) {
             AlertDialog.Builder(this)
                 .setTitle("Datos incompletos")
-                .setMessage("Algunos datos no fueron capturados correctamente. " +
-                        "Verifique que se hayan llenado todos los campos.")
+                .setMessage(
+                    "Algunos datos no fueron capturados correctamente. " +
+                            "Verifique que se hayan llenado todos los campos."
+                )
                 .setNeutralButton("OK", { dialogInterface: DialogInterface, i: Int -> })
                 .show()
-        }else{
-            val dbHelper = BDUsuarios(applicationContext)
-            val db = dbHelper?.writableDatabase
-
-            val values = ContentValues().apply {
-                Log.i("REGISTRAR", "Content values")
-                put("usuario",etEmail.text.toString())
-                put("nombre",etNombre.text.toString())
-                put("password",etPassword.text.toString())
-                put("telefono",etTelefono.text.toString())
+        } else {
+            var usuarioExistente: Boolean = false
+            var cant: Int = 0
+            //Valida
+            if (etEmail.text.trim().isNullOrEmpty()) {
+                Toast.makeText(this, "Ingrese Correo", Toast.LENGTH_SHORT).show()
+                return
             }
-            val newRowId = db?.insert("Usuarios", null, values)
+            try {
+                usuarioExistente = AppDatabase.get(application).getUsuariosDAO()
+                    .findByUsuario(etEmail.text.trim().toString())
+                    .usuario.isNotEmpty()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            if (usuarioExistente) {
+                Toast.makeText(
+                    this,
+                    "Ya existe usuario llamado: ${etEmail.text.trim().toString()}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+
+            var usuarioNuevo = Usuarios()
+            usuarioNuevo.usuario = etEmail.text.trim().toString()
+            usuarioNuevo.password = etPassword.text.toString()
+            usuarioNuevo.nombre = etNombre.text.trim().toString()
+            usuarioNuevo.telefono = etTelefono.text.trim().toString()
+
+            val hilo = object :Thread(){
+                override fun run() {
+                    try {
+                        AppDatabase.get(application).getUsuariosDAO().insert(usuarioNuevo)
+                        AppDatabase.get(application).getUsuariosDAO().getAll().forEach {
+                            Log.d("agregado", "Usuario : ${it.usuario}")
+                            Log.d("agregado", "Password : ${it.password}")
+                            Log.d("agregado", "Nombre: ${it.nombre}")
+                            Log.d("agregado", "Telefono : ${it.telefono}")
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        Log.d("agregado", ex.message)
+                    }
+                }
+            }
+            hilo.start()
+            hilo.join()
+
+
+            var info =
+                usuarioNuevo.usuario + "\n" + usuarioNuevo.password + "\n" + usuarioNuevo.nombre +
+                        "\n" + usuarioNuevo.telefono
 
             try {
-                val archivo = OutputStreamWriter(openFileOutput("datos-${etEmail.text}.txt", Activity.MODE_PRIVATE))
-                archivo.write("Nombre: ${etNombre.text.toString()}\n\nTelefono: ${etTelefono.text.toString()}\n\nEmail/Usuario: ${etEmail.text.toString()}")
+                val archivo = OutputStreamWriter(
+                    openFileOutput(
+                        "datos-${usuarioNuevo.usuario}.txt",
+                        Activity.MODE_PRIVATE
+                    )
+                )
+                archivo.write(info)
                 archivo.flush()
                 archivo.close()
             } catch (e: IOException) {
             }
-            Toast.makeText(this, "Los datos fueron guardados",Toast.LENGTH_SHORT).show()
-            view?. let {
-                Log.i("REGISTRAR", "Usuario registrado")
-                Snackbar.make(it, "¡Usuario registrado exitosamente!", Snackbar.LENGTH_LONG).show() }
+            Toast.makeText(this, "Los datos fueron guardados", Toast.LENGTH_SHORT).show()
             finish()
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
+            view?.let {
+                Snackbar.make(it, "¡Usuario registrado exitosamente!", Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
-    fun onCancelar(view : View){
+    fun onCancelar(view: View) {
         finish()
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

@@ -13,7 +13,7 @@ class MenuPrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_principal)
 
-        Log.i("Sesion de usuario",intent.getStringExtra("USER_SESSION_ID"))
+        Log.i("Prueba",intent.getStringExtra("USER_SESSION_ID"))
 //        intent.putExtra("USER_SESSION_ID",intent.getStringExtra("USER_SESSION_ID"))
         btnCuenta.setOnClickListener(){
             var usuario = intent.getStringExtra("USER_SESSION_ID")

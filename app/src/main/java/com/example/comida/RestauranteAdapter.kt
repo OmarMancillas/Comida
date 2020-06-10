@@ -1,6 +1,7 @@
 package com.example.comida
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +31,12 @@ class RestauranteAdapter(private val longItemClickListener:(Int) -> Unit): Recyc
     override fun onBindViewHolder(viewHolder: RestauranteAdapter.ViewHolder, position: Int) {
         viewHolder.itemView.setOnClickListener{
             val intent= Intent(viewHolder.itemView.context,MenuRestauranteActivity::class.java)
-            intent.putExtra("nombre",Singleton.dataset.get(position).nombre)
-            intent.putExtra("telefono",Singleton.dataset.get(position).telefono)
+            intent.putExtra("id_restaurante",Singleton.dataset.get(position).id_restaurante)
+            intent.putExtra("nombre_restaurante",Singleton.dataset.get(position).nombre_restaurante)
             intent.putExtra("direccion",Singleton.dataset.get(position).direccion)
-            intent.putExtra("logo",Singleton.dataset.get(position).logo)
+            intent.putExtra("telefono",Singleton.dataset.get(position).telefono)
+            intent.putExtra("tipo_comida",Singleton.dataset.get(position).tipo_comida)
+            Log.i("id_restaurante","${Singleton.dataset.get(position).id_restaurante}")
             viewHolder.itemView.context.startActivity(intent)
         }
 
@@ -42,21 +45,7 @@ class RestauranteAdapter(private val longItemClickListener:(Int) -> Unit): Recyc
             true
         }
 
-        viewHolder.tvNombre.text = Singleton.dataset.get(position).nombre
+        viewHolder.tvNombre.text = Singleton.dataset.get(position).nombre_restaurante
         viewHolder.tvDireccion.text = Singleton.dataset.get(position).direccion
-
-//        when (Singleton.dataSet.get(position).equipo.toString()){
-//            "EQUIPO ROJO"         -> {
-//                Log.i("Entra rojo",Singleton.dataSet.get(position).equipo.toString())
-//                viewHolder.tvEquipo.setTextColor(Color.RED)
-//            }
-//            "EQUIPO AZUL"     -> {
-//                Log.i("Entra azul",Singleton.dataSet.get(position).equipo.toString())
-//                viewHolder.tvEquipo.setTextColor(Color.BLUE)
-//            }
-//            else ->{
-//
-//            }
-//        }
     }
 }
