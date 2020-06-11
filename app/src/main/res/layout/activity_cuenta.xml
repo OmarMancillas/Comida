@@ -7,11 +7,36 @@
     android:background="@drawable/gradient_background"
     tools:context=".CuentaActivity">
 
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Nombre"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDatos" />
+
+    <EditText
+        android:id="@+id/etNombreCuenta"
+        android:layout_width="188dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:inputType="textPersonName"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDatos" />
+
     <EditText
         android:id="@+id/etEmailUsuarioCuenta"
         android:layout_width="188dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +48,7 @@
         android:id="@+id/tvEmailUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="52dp"
         android:text="Email/Usuario"
         android:textAlignment="center"
         android:textSize="20dp"
@@ -36,7 +61,7 @@
         android:id="@+id/tvTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:text="Telefono"
         android:textAlignment="center"
         android:textSize="20dp"
@@ -46,41 +71,27 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
 
     <TextView
-        android:id="@+id/tvNombre"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvDatos"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Nombre"
+        android:layout_marginTop="10dp"
+        android:text="DATOS"
         android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDatos" />
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnTomarFoto"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/etTelefonoCuenta"
         android:layout_width="188dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNombreCuenta" />
-
-    <EditText
-        android:id="@+id/etNombreCuenta"
-        android:layout_width="188dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:inputType="textPersonName"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDatos" />
 
     <ImageView
         android:id="@+id/ivFoto"
@@ -93,28 +104,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/man" />
 
-    <TextView
-        android:id="@+id/tvDatos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="DATOS"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnCambiarFoto"
-        tools:layout_editor_absoluteX="0dp" />
-
     <Button
         android:id="@+id/btnCambiarFoto"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/boton_redondo"
-        android:text="Cambiar Foto"
+        android:text="Seleccionar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
+
+    <Button
+        android:id="@+id/btnTomarFoto"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:background="@drawable/boton_redondo"
+        android:text="Tomar foto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCambiarFoto" />
 
     <Button
         android:id="@+id/btnGuardarCambios"
@@ -123,7 +134,7 @@
         android:layout_margin="@dimen/big_padding"
         android:layout_marginBottom="200dp"
         android:background="@drawable/boton_redondo"
-        android:text="Datos de la cuenta"
+        android:text="Guardar Cambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

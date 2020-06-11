@@ -36,7 +36,6 @@ class RestauranteAdapter(private val longItemClickListener:(Int) -> Unit): Recyc
             intent.putExtra("direccion",Singleton.dataset.get(position).direccion)
             intent.putExtra("telefono",Singleton.dataset.get(position).telefono)
             intent.putExtra("tipo_comida",Singleton.dataset.get(position).tipo_comida)
-            Log.i("id_restaurante","${Singleton.dataset.get(position).id_restaurante}")
             viewHolder.itemView.context.startActivity(intent)
         }
 

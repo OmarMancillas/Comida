@@ -45,13 +45,10 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         val dbHelper = BDUsuarios(applicationContext)
         val db = dbHelper?.readableDatabase
-        Log.d("Prueba","Entra al loadData")
         try{
             val cursor = db.rawQuery("SELECT * FROM Restaurantes",arrayOf<String>())
-            Log.d("Prueba",cursor.count.toString())
             with(cursor) {
                 while (moveToNext()) {
-                    Log.d("Prueba","Entra al cursor")
                     Singleton.dataset.add(
                         Restaurantes(
                             cursor.getInt((getColumnIndex("id_restaurante"))),
@@ -61,61 +58,11 @@ class RecyclerViewActivity : AppCompatActivity() {
                             cursor.getInt(getColumnIndex("tipo_comida"))
                         )
                     )
-//                descripcion_producto = cursor.getString(getColumnIndex("descripcion_producto"))
-//                listItems = listItems + descripcion_producto + "\n"
-//                Log.i("Prueba",descripcion_producto)
                 }
             }
         }catch (ex : Exception){
-            Log.d("Prueba",ex.message)
         }
     }
-//        Toast.makeText(this,"Usuario Registrado", Toast.LENGTH_SHORT).show()
-//        for(i in 1..6){
-//            var tipoComida = rand(1,6)
-//            var restauranteNuevo = Restaurantes()
-//            restauranteNuevo.id_restaurante = i
-//            restauranteNuevo.nombre_restaurante = "Restaurante ${i}"
-//            restauranteNuevo.direccion = "Direccion ${i}"
-//            if(i<10)
-//                restauranteNuevo.telefono = "867727090${i}"
-//            else
-//                restauranteNuevo.telefono = "86772709${i}"
-//            restauranteNuevo.tipo_comida = tipoComida
-//
-//            val hilo = object :Thread(){
-//                override fun run() {
-//                    try {
-//                        AppDatabase.get(application).getRestaurantesDAO().insert(restauranteNuevo)
-//                    } catch (ex: java.lang.Exception) {
-//                    }
-//                }
-//            }
-//            hilo.start()
-//            hilo.join()
-//        }
-//
-//        val hilo2 = object :Thread(){
-//            override fun run() {
-//                try {
-//                    AppDatabase.get(application).getRestaurantesDAO().getAll().forEach {
-//                        Singleton.dataset.add(
-//                Restaurantes(
-//                    it.id_restaurante,
-//                    it.nombre_restaurante,
-//                    it.direccion,
-//                    it.telefono,
-//                    it.tipo_comida
-//                )
-//                        )
-//                    }
-//                } catch (ex: java.lang.Exception) {
-//                }
-//            }
-//        }
-//        hilo2.start()
-//        hilo2.join()
-//    }
 
     fun rand(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }

@@ -39,7 +39,6 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             var usuarioExistente: Boolean = false
             var cant: Int = 0
-            //Valida
             if (etEmail.text.trim().isNullOrEmpty()) {
                 Toast.makeText(this, "Ingrese Correo", Toast.LENGTH_SHORT).show()
                 return
@@ -71,14 +70,7 @@ class RegisterActivity : AppCompatActivity() {
                 override fun run() {
                     try {
                         AppDatabase.get(application).getUsuariosDAO().insert(usuarioNuevo)
-                        AppDatabase.get(application).getUsuariosDAO().getAll().forEach {
-                            Log.d("agregado", "Usuario : ${it.usuario}")
-                            Log.d("agregado", "Password : ${it.password}")
-                            Log.d("agregado", "Nombre: ${it.nombre}")
-                            Log.d("agregado", "Telefono : ${it.telefono}")
-                        }
                     } catch (ex: java.lang.Exception) {
-                        Log.d("agregado", ex.message)
                     }
                 }
             }

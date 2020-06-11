@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val db = BDUsuarios(applicationContext)
+        db.copyDataBaseFromAssets(applicationContext)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
         var username : String   = etUsername!!.text.trim().toString()
         var password : String = etLoginPassword!!.text.trim().toString()
-        Log.i("agregado","${username}")
         val HiloLogin = object: Thread(){
             override fun run(){
                 try {
